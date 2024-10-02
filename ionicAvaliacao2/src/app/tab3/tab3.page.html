@@ -1,17 +1,36 @@
-<ion-header [translucent]="true">
+<!-- <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
       Tab 3
     </ion-title>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="container mt-3">
+    <ion-input [(ngModel)]="search" onchange="" placeholder="Filtrar pessoa no github (até 3 dígitos)..."
+      label-placement="floating" fill="outline">
+      <ion-button (click)="SearchChange()" fill="clear" slot="end" aria-label="Show/hide">
+        <ion-icon slot="icon-only" name="search-outline" aria-hidden="true"></ion-icon>
+      </ion-button>
+    </ion-input>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+    <div class="mt-2">
+      <ion-skeleton-text *ngIf="load == true" [animated]="true" class="w-100 rounded-3" style="height: 80vh;" />
+
+      <ion-list *ngIf="users.length > 0">
+        <ion-item class="pa-1 gap-2 d-flex" *ngFor="let use of users">
+          <ion-avatar class="pa-3">
+            <img src={{use.avatar_url}} />
+          </ion-avatar>
+          <ion-label class="ms-3">{{use.login}}</ion-label>
+        </ion-item>
+      </ion-list>
+
+      <div class="w-100 flex-column d-flex justify-content-center align-items-center" *ngIf="users.length === 0 && load == false">
+        <ion-icon icon="logo-github" style="font-size: 180px;" />
+        <ion-text class="fw-bold" style="font-size: 20px;">Pesquise um usuário acima...</ion-text>
+      </div>
+    </div>
+  </div>
 </ion-content>
