@@ -20,7 +20,6 @@ export class Tab3Page {
     }
     this.load = true;
     this.github.searchUsers(this.search).subscribe((d) => {
-      console.log(d.items)
       this.users = d.items;
       this.load = false;
     });
